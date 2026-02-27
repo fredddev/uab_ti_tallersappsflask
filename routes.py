@@ -2,6 +2,7 @@ from app import app, db
 from flask import render_template
 import formularios
 from models import Tarea
+from flask import render_template, redirect, url_for
 
 @app.route('/')
 @app.route('/index')
@@ -21,6 +22,12 @@ def sobrenosotros():
         return render_template('sobrenosotros.html', 
                                form = formulario,
                                tareas = tareas)
+@app.route('/eliminar/<int:id>')
+def eliminar(id):
+        tarea = Tarea.query.get_or_404(id)
+        db.session.delete(tarea)
+        db.session.commit()
+        return redirect(url_for('sobrenosotros'))
     
 @app.route('/saludo')
 def saludo():
