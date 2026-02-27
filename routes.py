@@ -39,7 +39,7 @@ def editar(id):
                 db.session.commit()
                 return redirect(url_for('sobrenosotros'))
         return render_template('editar.html', form = form)
-    
+
 @app.route('/saludo')
 def saludo():
         return 'Hola bienvenido a Taller Apps '
